@@ -2,6 +2,28 @@
 
 A research project for automatic alignment of lecture audio transcripts to presentation slides using multimodal retrieval models and dynamic programming.
 
+## Motivation
+
+### Problem: Lecture Video Review is Cumbersome
+
+Traditional lecture video recording systems face significant challenges:
+
+- **Technical failures**: Recording errors require re-shooting entire lectures
+- **Privacy concerns**: Instructors' image rights and consent issues
+- **Infrastructure requirements**: Need professional recording facilities
+- **Storage & bandwidth**: Large video files are expensive to store and stream
+
+### Our Proposal
+
+Use **audio-only recordings** to align with lecture slide PDFs:
+
+- **Minimal recording setup**: Just a microphone
+- **No privacy/consent issues**: No instructor images required
+- **Much smaller file sizes**: Easier distribution and storage
+- **Enables automated lecture review materials**: Students can navigate lectures via slides
+
+This approach makes lecture recording more accessible while maintaining educational value through automatic slide-audio alignment.
+
 ## Overview
 
 This project addresses the challenge of matching spoken lecture content to corresponding presentation slides using only audio input. Building upon the MaViLS (Matching Videos to Lecture Slides) dataset and methodology, I enhance the dynamic programming pipeline with state-of-the-art multimodal retrieval embeddings and introduce several novel features to improve matching accuracy.
@@ -10,6 +32,16 @@ The system consists of two main components:
 
 - **Research Pipeline** (`experiment/`): Evaluation framework for benchmarking algorithms on the MaViLS dataset with 20 annotated lectures
 - **Inference Pipeline** (`inference/`): End-to-end production system for processing arbitrary lecture audio and slides (ASR → Matching → TTS)
+
+## Novel Contributions
+
+This project extends the MaViLS baseline approach with several key innovations:
+
+1. **State-of-the-art Multimodal Embeddings**: Integration of NVIDIA NeMo Retriever ColEmbed (1B/3B parameters) for superior text-image representation learning
+2. **Confidence Boosting Mechanism**: Novel scoring adjustment based on the margin between top-k matches to improve decision quality
+3. **Context-Aware Matching**: Exponential moving average (EMA) of recent matches for temporal consistency
+4. **Comprehensive Hyperparameter Optimization**: Systematic grid search across 7 key parameters to identify optimal configuration
+
 
 ## Key Features
 
@@ -208,6 +240,10 @@ Default values obtained through grid search on MaViLS dataset:
 | `context_weight` | 0.04 | Weight for EMA context similarity |
 | `context_update_rate` | 0.24 | EMA decay rate for context updates |
 | `min_sentence_length` | 2 | Minimum words to use similarity scores |
+
+## Results
+
+Will be updated soon
 
 ## Dataset
 
