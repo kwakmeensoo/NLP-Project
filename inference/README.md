@@ -9,8 +9,6 @@ This module provides a complete end-to-end pipeline that:
 2. Matches transcript sentences to PDF slide pages
 3. Synthesizes aligned speech output (TTS)
 
-This is the production-ready version designed for deployment and real-world usage.
-
 **⚠️ Language Support:** This pipeline currently supports **English audio only**. The ASR model (NVIDIA Parakeet TDT 0.6B v2) is trained exclusively on English speech data.
 
 ## Files
@@ -18,7 +16,7 @@ This is the production-ready version designed for deployment and real-world usag
 - **`run.py`**: Command-line interface and entry point
 - **`pipeline.py`**: Integrated pipeline orchestrating ASR → Matching → TTS
 - **`asr_module.py`**: Audio transcription with NVIDIA Parakeet TDT
-- **`match.py`**: Slide matching processor (production version)
+- **`match.py`**: Slide matching processor
 - **`tts_module.py`**: Text-to-speech synthesis with Kokoro-82M
 
 ## Quick Start
@@ -53,7 +51,7 @@ python run.py --audio lecture.wav --pdf slides.pdf
 python run.py --audio lecture.wav --pdf slides.pdf --model-size 3b
 ```
 
-Default is 1B for faster processing.
+Default is 1B for faster processing and VRAM constraint.
 
 ## Command Reference
 
@@ -282,25 +280,12 @@ python run.py \
 | 1B | ~4GB | Fast | Good | Quick processing, resource-constrained |
 | 3B | ~8GB | Slower | Better | High-accuracy requirements |
 
-**Recommendation**: Use 1B for most cases, 3B when accuracy is critical.
-
 ## Memory Management
 
 The pipeline automatically manages GPU memory:
 - Models are loaded on-demand
 - Each stage unloads its model after completion
 - GPU cache is cleared between stages
-
-**Manual Control**:
-```python
-from pipeline import AudioSlideMatchingPipeline
-
-pipeline = AudioSlideMatchingPipeline()
-pipeline.asr_processor.load_model()
-# ... use model ...
-pipeline.asr_processor.unload_model()
-pipeline.asr_processor.clear_cache()
-```
 
 ## Performance Tips
 
@@ -324,9 +309,7 @@ pipeline.asr_processor.clear_cache()
 ASR module supports common formats:
 - WAV (recommended)
 - MP3
-- FLAC
-- OGG
-- M4A
+- ...
 
 Audio is automatically resampled to 16kHz mono if needed.
 
@@ -367,33 +350,6 @@ min_sentence_length = 2         # Min words to use similarity
 - **exponential_scale**: Increase to amplify differences between good/bad matches
 - **confidence_threshold**: Increase for more conservative confidence boosting
 
-## Programmatic Usage
-
-You can also use the pipeline programmatically:
-
-```python
-from pipeline import AudioSlideMatchingPipeline
-
-# Initialize pipeline
-pipeline = AudioSlideMatchingPipeline(
-    asr_model="nvidia/parakeet-tdt-0.6b-v2",
-    matching_model_size="1b",
-    tts_model="hexgrad/Kokoro-82M",
-    device="cuda"
-)
-
-# Run full pipeline
-results = pipeline.run(
-    audio_path="lecture.wav",
-    pdf_path="slides.pdf",
-    output_dir="results"
-)
-
-# Access results
-print(f"Matched {len(results['matches'])} sentences")
-print(f"Average confidence: {results['metadata']['avg_confidence']:.2f}")
-```
-
 ## Troubleshooting
 
 ### Out of Memory
@@ -409,19 +365,6 @@ python run.py --audio lecture.wav --pdf slides.pdf --model-size 1b
 python run.py --audio lecture.wav --pdf slides.pdf --device cpu
 ```
 
-### Poor Matching Quality
-
-```bash
-# Use 3B model for better accuracy
-python run.py --audio lecture.wav --pdf slides.pdf --model-size 3b
-
-# Adjust matching parameters
-python run.py --audio lecture.wav --pdf slides.pdf \
-  --jump-penalty 2.0 \
-  --backward-weight 2.5 \
-  --confidence-threshold 0.95
-```
-
 ### Audio Processing Issues
 
 - **Non-English audio**: This pipeline only supports English audio. The ASR model cannot transcribe other languages.
@@ -434,69 +377,6 @@ python run.py --audio lecture.wav --pdf slides.pdf \
 - Ensure PDF is not password-protected
 - Check PDF has actual content (not just scanned images)
 - Try re-saving PDF with standard settings
-
-## Development Notes
-
-### Testing
-
-Run tests with:
-
-```bash
-# From inference directory
-cd inference
-python -m pytest test/
-```
-
-## Integration Examples
-
-### Batch Processing
-
-```python
-from pathlib import Path
-from pipeline import AudioSlideMatchingPipeline
-
-pipeline = AudioSlideMatchingPipeline(model_size="1b")
-
-lectures = [
-    ("lecture1.wav", "slides1.pdf"),
-    ("lecture2.wav", "slides2.pdf"),
-    ("lecture3.wav", "slides3.pdf"),
-]
-
-for i, (audio, pdf) in enumerate(lectures):
-    results = pipeline.run(
-        audio_path=audio,
-        pdf_path=pdf,
-        output_dir=f"results/lecture_{i+1}"
-    )
-    print(f"Processed {audio}: {len(results['matches'])} matches")
-```
-
-### Custom Post-Processing
-
-```python
-import json
-from pipeline import AudioSlideMatchingPipeline
-
-pipeline = AudioSlideMatchingPipeline()
-
-# Run pipeline
-results = pipeline.run("lecture.wav", "slides.pdf", "output")
-
-# Custom analysis
-matches = results['matches']
-high_confidence = [m for m in matches if m['confidence_score'] > 0.9]
-
-print(f"High confidence matches: {len(high_confidence)}/{len(matches)}")
-
-# Save custom report
-with open("output/custom_report.json", "w") as f:
-    json.dump({
-        "total_matches": len(matches),
-        "high_confidence_count": len(high_confidence),
-        "avg_confidence": sum(m['confidence_score'] for m in matches) / len(matches)
-    }, f, indent=2)
-```
 
 ## License and Model Information
 
