@@ -4,7 +4,7 @@ A research project for automatic alignment of lecture audio transcripts to prese
 
 ## Overview
 
-This project addresses the challenge of matching spoken lecture content to corresponding presentation slides using only audio input. Building upon the MaViLS (Matching Videos to Lecture Slides) dataset and methodology, we enhance the dynamic programming pipeline with state-of-the-art multimodal retrieval embeddings and introduce several novel features to improve matching accuracy.
+This project addresses the challenge of matching spoken lecture content to corresponding presentation slides using only audio input. Building upon the MaViLS (Matching Videos to Lecture Slides) dataset and methodology, I enhance the dynamic programming pipeline with state-of-the-art multimodal retrieval embeddings and introduce several novel features to improve matching accuracy.
 
 The system consists of two main components:
 
@@ -267,7 +267,7 @@ Ground truth files are provided in Excel format with columns:
 
 ## Citation
 
-This project builds upon the MaViLS dataset and methodology. If you use this work, please cite:
+This project builds upon the MaViLS dataset and methodology.
 
 ```bibtex
 @inproceedings{anderer2023mavils,
