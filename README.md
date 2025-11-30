@@ -87,7 +87,7 @@ Our approach extends traditional DP-based slide matching with:
 
 3. **Post-installation model configuration**
 
-   After installation, you must manually patch the NeMo Retriever configuration files:
+   After installation, you must manually patch the NeMo Retriever configuration files because of dependency issues:
 
    ```bash
    conda activate nlp-project
@@ -264,23 +264,6 @@ Ground truth files are provided in Excel format with columns:
 - **Caching**:
   - Embeddings cached within single evaluation runs
   - Disable with `use_cached_similarity=False` for memory-constrained scenarios
-
-## Development Notes
-
-### Code Organization
-
-The `match.py` module exists in two locations:
-- `experiment/match.py`: Research version with caching optimizations for batch evaluation
-- `inference/match.py`: Production version optimized for single-run inference
-
-When modifying the core algorithm, ensure changes are synchronized across both versions.
-
-### Extension Points
-
-- **Custom Features**: Add new scoring components in the DP score calculation
-- **Alternative Models**: Swap embedding models by modifying model loading in `match.py`
-- **Post-processing**: Add filtering or smoothing in the backtracking phase
-- **Evaluation Metrics**: Extend `evaluate.py` with additional performance measures
 
 ## Citation
 
