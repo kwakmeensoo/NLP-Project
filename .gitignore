@@ -1,0 +1,10 @@
+# Python cache
+__pycache__/
+
+# Inference outputs
+inference/run_*/
+
+# Experiment outputs
+experiment/evaluation_results/
+experiment/grid_search_results/
+experiment/ablation_results/
