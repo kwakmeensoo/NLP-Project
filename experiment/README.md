@@ -25,10 +25,9 @@ This module contains scripts for evaluating the slide matching algorithm on the 
   - Quantifies contribution of each component
   - Helps understand which features matter most
 
-- **`match.py`**: Core slide matching processor (research version)
-  - Implements dynamic programming-based matching algorithm
-  - Includes caching optimizations for faster batch evaluation
-  - Same core algorithm as `inference/match.py` but with research-focused optimizations
+- **`match.py`**: Core slide matching algorithm
+  - Implements dynamic programming-based matching with multimodal embeddings
+  - Used for both research evaluation and practical application
 
 ### Dataset
 
@@ -287,7 +286,6 @@ Typical workflow for algorithm development:
 2. **Hyperparameter tuning**: `python grid_search.py`
 3. **Feature analysis**: `python ablation_study.py`
 4. **Final benchmark**: `python evaluate.py --full` (20 lectures)
-5. **Sync changes**: Copy algorithm changes to `inference/match.py`
 
 ## Citation
 
