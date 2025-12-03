@@ -1,6 +1,6 @@
 # Inference Module
 
-Production pipeline for audio-to-slide matching with integrated ASR and TTS.
+Practical application pipeline for audio-to-slide matching with integrated ASR and TTS.
 
 ## Overview
 
@@ -413,7 +413,7 @@ This module is part of the NLP audio-to-slide matching project.
 - **NVIDIA NeMo Retriever** requires additional licensing for commercial deployment
   - Academic/research use is generally permitted
   - Commercial users should obtain NVIDIA AI Enterprise license
-- For production deployment, verify license compliance for your specific use case
+- For real-world deployment, verify license compliance for your specific use case
 
 ### Additional Resources
 

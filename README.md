@@ -31,7 +31,7 @@ This project addresses the challenge of matching spoken lecture content to corre
 The system consists of two main components:
 
 - **Research Pipeline** (`experiment/`): Evaluation framework for benchmarking algorithms on the MaViLS dataset with 20 annotated lectures
-- **Inference Pipeline** (`inference/`): End-to-end production system for processing arbitrary lecture audio and slides (ASR → Matching → TTS)
+- **Inference Pipeline** (`inference/`): End-to-end practical application system for processing arbitrary lecture audio and slides (ASR → Matching → TTS)
 
 ## Novel Contributions
 
@@ -55,7 +55,7 @@ Our approach extends traditional DP-based slide matching with:
 - **Context Awareness**: Exponential moving average of historical matches for local consistency
 - **Exponential Scaling**: Amplification of similarity score differences for sharper decision boundaries
 
-### Production-Ready Pipeline
+### Practical Application Pipeline
 
 - Automatic speech recognition using NVIDIA Parakeet TDT (0.6B parameters)
 - Sentence-level timestamp extraction and segmentation
@@ -70,15 +70,15 @@ Our approach extends traditional DP-based slide matching with:
 │   ├── evaluate.py          # Benchmark evaluation on MaViLS dataset
 │   ├── grid_search.py       # Hyperparameter optimization
 │   ├── ablation_study.py    # Feature contribution analysis
-│   ├── match.py             # Core matching algorithm (research version)
+│   ├── match.py             # Core matching algorithm
 │   └── dataset/             # MaViLS benchmark data
 │       ├── lectures/        # Audio files and PDF slides
 │       └── ground_truth_files/  # Manually annotated alignments
 │
-├── inference/               # Production pipeline
+├── inference/               # Practical application pipeline
 │   ├── run.py              # Command-line interface
 │   ├── pipeline.py         # Integrated ASR → Matching → TTS pipeline
-│   ├── match.py            # Slide matching processor (production version)
+│   ├── match.py            # Core matching algorithm
 │   ├── asr_module.py       # Audio transcription module
 │   └── tts_module.py       # Text-to-speech synthesis module
 │
