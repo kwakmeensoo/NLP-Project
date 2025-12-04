@@ -243,7 +243,58 @@ Default values obtained through grid search on MaViLS dataset:
 
 ## Results
 
-Will be updated soon
+### Benchmark Performance
+
+Pre-computed evaluation results on the full MaViLS dataset (20 lectures, 12,830 sentences) are available in [experiment/results/](experiment/results/).
+
+**Full Dataset Evaluation (3B Model)**:
+- **Overall Accuracy**: 81.66%
+- **Average MAE**: 0.262
+- **Average RMSE**: 0.768
+- **Model**: nvidia/llama-nemoretriever-colembed-3b-v1
+
+Detailed per-lecture results and analysis available in [experiment/results/run_evaluate/](experiment/results/run_evaluate/).
+
+**Ablation Study (3B Model)**:
+
+Feature contribution analysis showing impact of each algorithm component:
+
+| Configuration | Accuracy | Δ from Baseline |
+|--------------|----------|-----------------|
+| All Features (baseline) | 81.66% ± 9.85% | - |
+| No Sentence Length Filter | 81.62% ± 9.84% | -0.04% |
+| No Context Similarity | 81.18% ± 10.21% | -0.48% |
+| No Exponential Scaling | 79.02% ± 12.56% | -2.64% |
+| No Confidence Boost | 78.40% ± 13.64% | -3.26% |
+| No Features | 78.37% ± 13.60% | -3.29% |
+
+**Key Findings**:
+- Confidence boosting and exponential scaling are the most impactful features
+- Context similarity provides modest but consistent improvement (~0.5%)
+- Sentence length filtering has minimal impact on accuracy
+- All features combined achieve best performance with lowest variance
+
+Complete ablation results available in [experiment/results/run_ablation/](experiment/results/run_ablation/).
+
+### Reproducibility
+
+**For reproducing experimental results**:
+- Use the **3B model** (`--model-size 3b`) for research evaluation
+- The reported 81.66% accuracy was obtained with the 3B model on all 20 lectures
+- All experiment scripts default to 3B model: `experiment/evaluate.py`, `experiment/grid_search.py`, `experiment/ablation_study.py`
+
+**For practical inference applications**:
+- Use the **1B model** (`--model-size 1b`) for faster inference with lower VRAM requirements
+- The 1B model requires only ~4GB VRAM (vs ~8GB for 3B) and runs approximately 2x faster
+- The inference pipeline defaults to 1B model: `inference/run.py`
+- Note: Accuracy metrics for the 1B model have not been formally benchmarked on the full dataset
+
+**Model Comparison**:
+
+| Model | VRAM | Speed Relative to 3B | Benchmark Accuracy | Default Usage |
+|-------|------|----------------------|--------------------|---------------|
+| 3B | ~8GB | 1x (baseline) | 81.66% (measured) | Research evaluation |
+| 1B | ~4GB | ~2x faster | Not benchmarked | Practical inference |
 
 ## Dataset
 

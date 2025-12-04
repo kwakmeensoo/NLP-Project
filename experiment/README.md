@@ -204,6 +204,47 @@ ablation_results/
 └── ablation_study_YYYYMMDD_HHMMSS.json
 ```
 
+## Pre-Computed Results
+
+The [results/](results/) directory contains pre-computed evaluation results using the 3B model on all 20 MaViLS lectures with optimized hyperparameters:
+
+### Full Dataset Evaluation (`results/run_evaluate/`)
+
+Complete benchmark evaluation on all 20 lectures:
+- **Overall Accuracy**: 81.66%
+- **Per-lecture results**: Individual Excel files with detailed predictions, errors, and metrics
+- **evaluation_summary.json**: Aggregate statistics across all lectures
+
+Key metrics:
+- Average MAE: 0.262
+- Average RMSE: 0.768
+- Total evaluated sentences: 12,830
+- Model: nvidia/llama-nemoretriever-colembed-3b-v1
+
+### Ablation Study (`results/run_ablation/`)
+
+Feature contribution analysis showing impact of each algorithm component:
+
+**Results Summary** (sorted by accuracy):
+1. **All Features** (baseline): 81.66% ± 9.85%
+   - Exponential scaling + Confidence boost + Context similarity + Length filter
+2. **No Sentence Length Filter**: 81.62% ± 9.84% (-0.04%)
+3. **No Context Similarity**: 81.18% ± 10.21% (-0.48%)
+4. **No Exponential Scaling**: 79.02% ± 12.56% (-2.64%)
+5. **No Confidence Boost**: 78.40% ± 13.64% (-3.26%)
+6. **No Features**: 78.37% ± 13.60% (-3.29%)
+
+**Files**:
+- [ablation_results.csv](results/run_ablation/ablation_results.csv): Complete results table
+- [ablation_summary.json](results/run_ablation/ablation_summary.json): Structured metrics
+- [ablation_report.txt](results/run_ablation/ablation_report.txt): Human-readable summary
+
+**Key Findings**:
+- Confidence boosting and exponential scaling are the most impactful features
+- Context similarity provides modest but consistent improvement
+- Sentence length filtering has minimal impact on accuracy
+- All features combined achieve best performance with lowest variance
+
 ## Metrics
 
 The evaluation computes:
