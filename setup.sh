@@ -1,9 +1,6 @@
 #!/bin/bash
 set -euo pipefail  # Exit on error, undefined vars, pipe failures
 
-# Accept Conda Terms of Service automatically
-export CONDA_ACCEPT_TOS=1
-
 # Colors for better readability
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
