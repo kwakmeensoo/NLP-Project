@@ -89,14 +89,12 @@ Our approach extends traditional DP-based slide matching with:
 
 ### Prerequisites
 
-- NVIDIA GPU with CUDA support (≥8GB VRAM recommended for 3B model)
+- NVIDIA GPU with CUDA support (≥8GB VRAM for inference, ≥12GB recommended for experiments)
 - Conda or Miniconda
 
-**Tested Local Environment:**
-- GPU: NVIDIA RTX 3070
-- OS: Ubuntu 24.04
-- CUDA: 12.6
-- Note: Full benchmark evaluations were conducted with the 3B model on a higher-spec GPU environment
+**Tested Environments:**
+- Development/Inference: NVIDIA RTX 3070, Ubuntu 24.04, CUDA 12.6 (1B model)
+- Experiments/Benchmarks: NVIDIA L40S (3B model)
 
 ### Setup Instructions
 
@@ -205,26 +203,53 @@ The core matching algorithm employs a dynamic programming approach optimized for
 1. **Embedding Extraction**
    - Convert PDF slides to images (150 DPI)
    - Encode transcript sentences and slide images using NeMo Retriever ColEmbed
-   - Compute cosine similarity matrix between all text-image pairs
+   - Compute normalized similarity matrix between all text-image pairs
 
-2. **Dynamic Programming with Enhanced Features**
+2. **Similarity Preprocessing**
+
+   Apply enhancement features before dynamic programming:
+
+   - **Exponential Scaling**: Transform normalized similarities to amplify differences
+     ```
+     S[i,j] ← exp(α · (S[i,j] - 1))
+     ```
+     where α = 2.785 is the exponential scale factor
+
+   - **Confidence Boosting**: Multiply scores when second-best match is weak
+     ```
+     S[i,j] ← S[i,j] · w_c   if S[i,second_best] < τ
+     ```
+     where w_c = 2.18 (confidence weight) and τ = 0.913 (confidence threshold)
+
+3. **Dynamic Programming with Context Awareness**
+
+   For each sentence i and slide j, compute the optimal cumulative score:
+
    ```
-   score[i][j] = similarity[i][j] * scale_factor
-                 + context_similarity[i][j]
-                 + confidence_boost[i][j]
-                 - transition_penalty[i][j]
+   dp[i,j] = max_k { dp[i-1,k] + score[i,j] - penalty(k,j) }
+
+   where:
+     score[i,j] = S[i,j] + w_ctx · C[j]
+     penalty(k,j) = { (j-k-1) · γ           if k < j  (forward)
+                    { (k-j) · γ · w_b       if k ≥ j  (backward)
    ```
 
-   Where:
-   - `similarity[i][j]`: Base cosine similarity between sentence i and slide j
-   - `scale_factor`: Exponential scaling to amplify differences
-   - `context_similarity`: EMA of recent matches for local coherence
-   - `confidence_boost`: Bonus when second-best match is significantly weaker
-   - `transition_penalty`: Jump penalties with special handling for backward transitions
+   Key components:
+   - `S[i,j]`: Preprocessed similarity score (with exponential scaling and confidence boost)
+   - `C[j]`: Context score (exponential moving average) for slide j
+   - `w_ctx = 0.04`: Weight for context similarity contribution
+   - `γ = 1.5`: Base jump penalty
+   - `w_b = 1.85`: Backward jump weight multiplier
 
-3. **Backtracking**
+   Context update after each sentence:
+   ```
+   C ← C + β · (S[i] - C)
+   ```
+   where β = 0.24 is the EMA update rate
+
+4. **Backtracking**
    - Viterbi-style backtracking to recover optimal alignment path
-   - Per-sentence confidence scores based on similarity margins
+   - Per-sentence confidence scores extracted from original normalized similarity matrix
 
 ### Optimized Hyperparameters
 
