@@ -1,6 +1,9 @@
 #!/bin/bash
 set -euo pipefail  # Exit on error, undefined vars, pipe failures
 
+# Accept Conda Terms of Service automatically
+export CONDA_ACCEPT_TOS=1
+
 # Colors for better readability
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -43,10 +46,10 @@ echo ""
 conda create -n "$ENV_NAME" python=3.12 -y
 
 echo ""
-echo -e "${GREEN}Step 2/8: Installing PyTorch with CUDA 12.6${NC}"
+echo -e "${GREEN}Step 2/8: Installing PyTorch with CUDA 12.4${NC}"
 echo "   This will install torch, torchvision, torchaudio..."
 echo ""
-conda run -n "$ENV_NAME" pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu126
+conda run -n "$ENV_NAME" pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu124
 
 echo ""
 echo -e "${GREEN}Step 3/8: Installing CUDA Python${NC}"
