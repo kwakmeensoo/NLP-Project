@@ -49,7 +49,7 @@ echo ""
 echo -e "${GREEN}Step 2/8: Installing PyTorch with CUDA 12.4${NC}"
 echo "   This will install torch, torchvision, torchaudio..."
 echo ""
-conda run -n "$ENV_NAME" pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu124
+conda run -n "$ENV_NAME" pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
 
 echo ""
 echo -e "${GREEN}Step 3/8: Installing CUDA Python${NC}"
