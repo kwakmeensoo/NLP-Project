@@ -1,0 +1,72 @@
+================================================================================
+ABLATION STUDY REPORT
+================================================================================
+
+Total Evaluations: 120
+Successful: 120
+Failed: 0
+
+--------------------------------------------------------------------------------
+CONFIGURATION COMPARISON (sorted by accuracy)
+--------------------------------------------------------------------------------
+
+1. All Features
+   Features: EXP=ON | CONF=ON | CTX=ON | LEN=ON
+   Avg Accuracy: 0.8166 (+/- 0.0985)
+   Range: [0.6204, 0.9312]
+   Avg MAE: 0.26
+   Avg RMSE: 0.77
+   Lectures: 20
+
+2. No Sentence Length Filter
+   Features: EXP=ON | CONF=ON | CTX=ON | LEN=OFF
+   Avg Accuracy: 0.8162 (+/- 0.0984)
+   Range: [0.6204, 0.9312]
+   Avg MAE: 0.26
+   Avg RMSE: 0.77
+   Lectures: 20
+
+3. No Context Similarity
+   Features: EXP=ON | CONF=ON | CTX=OFF | LEN=ON
+   Avg Accuracy: 0.8118 (+/- 0.1021)
+   Range: [0.6177, 0.9312]
+   Avg MAE: 0.27
+   Avg RMSE: 0.77
+   Lectures: 20
+
+4. No Exponential Scaling
+   Features: EXP=OFF | CONF=ON | CTX=ON | LEN=ON
+   Avg Accuracy: 0.7902 (+/- 0.1256)
+   Range: [0.5656, 0.9312]
+   Avg MAE: 0.39
+   Avg RMSE: 1.01
+   Lectures: 20
+
+5. No Confidence Boost
+   Features: EXP=ON | CONF=OFF | CTX=ON | LEN=ON
+   Avg Accuracy: 0.7840 (+/- 0.1364)
+   Range: [0.4706, 0.9363]
+   Avg MAE: 0.41
+   Avg RMSE: 1.03
+   Lectures: 20
+
+6. No Features
+   Features: EXP=OFF | CONF=OFF | CTX=OFF | LEN=OFF
+   Avg Accuracy: 0.7837 (+/- 0.1360)
+   Range: [0.4706, 0.9250]
+   Avg MAE: 0.40
+   Avg RMSE: 1.02
+   Lectures: 20
+
+--------------------------------------------------------------------------------
+FEATURE IMPACT ANALYSIS
+--------------------------------------------------------------------------------
+
+Baseline (All Features): 0.8166
+
+confidence_boost          | Impact: +0.0326 | Accuracy w/o: 0.7840
+exponential_scaling       | Impact: +0.0264 | Accuracy w/o: 0.7902
+context_similarity        | Impact: +0.0048 | Accuracy w/o: 0.8118
+sentence_length           | Impact: +0.0004 | Accuracy w/o: 0.8162
+
+================================================================================

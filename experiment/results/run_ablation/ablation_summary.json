@@ -1,0 +1,118 @@
+{
+  "baseline_params": {
+    "jump_penalty": 1.5,
+    "backward_weight": 1.85,
+    "use_exponential_scaling": true,
+    "exponential_scale": 2.785,
+    "use_confidence_boost": true,
+    "confidence_threshold": 0.913,
+    "confidence_weight": 2.18,
+    "use_context_similarity": true,
+    "context_weight": 0.04,
+    "context_update_rate": 0.24,
+    "min_sentence_length": 2
+  },
+  "summary": {
+    "total_evaluations": 120,
+    "successful": 120,
+    "failed": 0,
+    "config_stats": [
+      {
+        "config_name": "All Features",
+        "features": {
+          "exponential_scaling": true,
+          "confidence_boost": true,
+          "context_similarity": true,
+          "sentence_length": true
+        },
+        "avg_accuracy": 0.8165862387772924,
+        "std_accuracy": 0.09847519899643671,
+        "min_accuracy": 0.6204081632653061,
+        "max_accuracy": 0.9311740890688259,
+        "avg_mae": 0.26241531428488796,
+        "avg_rmse": 0.7675378835396475,
+        "num_lectures": 20
+      },
+      {
+        "config_name": "No Sentence Length Filter",
+        "features": {
+          "exponential_scaling": true,
+          "confidence_boost": true,
+          "context_similarity": true,
+          "sentence_length": false
+        },
+        "avg_accuracy": 0.8162233143885278,
+        "std_accuracy": 0.09843158724415547,
+        "min_accuracy": 0.620380739081747,
+        "max_accuracy": 0.9311740890688259,
+        "avg_mae": 0.26284626588453697,
+        "avg_rmse": 0.768193432847044,
+        "num_lectures": 20
+      },
+      {
+        "config_name": "No Context Similarity",
+        "features": {
+          "exponential_scaling": true,
+          "confidence_boost": true,
+          "context_similarity": false,
+          "sentence_length": true
+        },
+        "avg_accuracy": 0.8117951755418851,
+        "std_accuracy": 0.10206036297087451,
+        "min_accuracy": 0.617687074829932,
+        "max_accuracy": 0.9311740890688259,
+        "avg_mae": 0.2676697188022924,
+        "avg_rmse": 0.774061815629013,
+        "num_lectures": 20
+      },
+      {
+        "config_name": "No Exponential Scaling",
+        "features": {
+          "exponential_scaling": false,
+          "confidence_boost": true,
+          "context_similarity": true,
+          "sentence_length": true
+        },
+        "avg_accuracy": 0.7902162051588559,
+        "std_accuracy": 0.1255981598935034,
+        "min_accuracy": 0.5656108597285068,
+        "max_accuracy": 0.9311740890688259,
+        "avg_mae": 0.38829512914874953,
+        "avg_rmse": 1.0122717581355292,
+        "num_lectures": 20
+      },
+      {
+        "config_name": "No Confidence Boost",
+        "features": {
+          "exponential_scaling": true,
+          "confidence_boost": false,
+          "context_similarity": true,
+          "sentence_length": true
+        },
+        "avg_accuracy": 0.7839689447853162,
+        "std_accuracy": 0.13637623621429168,
+        "min_accuracy": 0.47058823529411764,
+        "max_accuracy": 0.9363395225464191,
+        "avg_mae": 0.40560347539520186,
+        "avg_rmse": 1.0310333094457715,
+        "num_lectures": 20
+      },
+      {
+        "config_name": "No Features",
+        "features": {
+          "exponential_scaling": false,
+          "confidence_boost": false,
+          "context_similarity": false,
+          "sentence_length": false
+        },
+        "avg_accuracy": 0.7837423833573142,
+        "std_accuracy": 0.13603914393145256,
+        "min_accuracy": 0.47058823529411764,
+        "max_accuracy": 0.925,
+        "avg_mae": 0.39864400482678863,
+        "avg_rmse": 1.0159813231119574,
+        "num_lectures": 20
+      }
+    ]
+  }
+}

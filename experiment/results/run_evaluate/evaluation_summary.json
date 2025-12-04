@@ -1,0 +1,450 @@
+{
+  "parameters": {
+    "jump_penalty": 1.5,
+    "backward_weight": 1.85,
+    "use_exponential_scaling": true,
+    "exponential_scale": 2.785,
+    "use_confidence_boost": true,
+    "confidence_threshold": 0.913,
+    "confidence_weight": 2.18,
+    "use_context_similarity": true,
+    "context_weight": 0.04,
+    "context_update_rate": 0.24,
+    "min_sentence_length": 2
+  },
+  "results": [
+    {
+      "total_sentences": 684,
+      "evaluated": 500,
+      "skipped": 184,
+      "correct": 361,
+      "incorrect": 139,
+      "accuracy": 0.722,
+      "mae": 0.452,
+      "rmse": 1.147170431975999,
+      "lecture_name": "cryptocurrency",
+      "time_elapsed": 66.76457023620605,
+      "status": "success"
+    },
+    {
+      "total_sentences": 897,
+      "evaluated": 893,
+      "skipped": 4,
+      "correct": 555,
+      "incorrect": 338,
+      "accuracy": 0.6215005599104143,
+      "mae": 0.458006718924972,
+      "rmse": 0.8066076502586416,
+      "lecture_name": "psychology",
+      "time_elapsed": 88.07068800926208,
+      "status": "success"
+    },
+    {
+      "total_sentences": 1270,
+      "evaluated": 1201,
+      "skipped": 69,
+      "correct": 820,
+      "incorrect": 381,
+      "accuracy": 0.6827643630308077,
+      "mae": 0.9492089925062448,
+      "rmse": 2.1952943391802773,
+      "lecture_name": "reinforcement_learning",
+      "time_elapsed": 77.06464338302612,
+      "status": "success"
+    },
+    {
+      "total_sentences": 735,
+      "evaluated": 735,
+      "skipped": 0,
+      "correct": 456,
+      "incorrect": 279,
+      "accuracy": 0.6204081632653061,
+      "mae": 0.5931972789115646,
+      "rmse": 1.0613814640575263,
+      "lecture_name": "cognitive_robotics_MIT",
+      "time_elapsed": 69.15826654434204,
+      "status": "success"
+    },
+    {
+      "total_sentences": 822,
+      "evaluated": 489,
+      "skipped": 333,
+      "correct": 425,
+      "incorrect": 64,
+      "accuracy": 0.869120654396728,
+      "mae": 0.3006134969325153,
+      "rmse": 3.4626254563733494,
+      "lecture_name": "ML_for_health",
+      "time_elapsed": 102.29099225997925,
+      "status": "success"
+    },
+    {
+      "total_sentences": 841,
+      "evaluated": 274,
+      "skipped": 567,
+      "correct": 250,
+      "incorrect": 24,
+      "accuracy": 0.9124087591240876,
+      "mae": 0.10948905109489052,
+      "rmse": 0.4756862119746312,
+      "lecture_name": "climate_science_policy",
+      "time_elapsed": 33.93289852142334,
+      "status": "success"
+    },
+    {
+      "total_sentences": 192,
+      "evaluated": 143,
+      "skipped": 49,
+      "correct": 118,
+      "incorrect": 25,
+      "accuracy": 0.8251748251748252,
+      "mae": 0.1958041958041958,
+      "rmse": 0.4876086932800089,
+      "lecture_name": "cities_and_climate",
+      "time_elapsed": 37.57806348800659,
+      "status": "success"
+    },
+    {
+      "total_sentences": 312,
+      "evaluated": 275,
+      "skipped": 37,
+      "correct": 220,
+      "incorrect": 55,
+      "accuracy": 0.8,
+      "mae": 0.2581818181818182,
+      "rmse": 0.6120011883529758,
+      "lecture_name": "cities_and_decarbonization",
+      "time_elapsed": 44.097821950912476,
+      "status": "success"
+    },
+    {
+      "total_sentences": 80,
+      "evaluated": 80,
+      "skipped": 0,
+      "correct": 74,
+      "incorrect": 6,
+      "accuracy": 0.925,
+      "mae": 0.075,
+      "rmse": 0.27386127875258304,
+      "lecture_name": "computer_vision_2_2",
+      "time_elapsed": 15.726192474365234,
+      "status": "success"
+    },
+    {
+      "total_sentences": 715,
+      "evaluated": 247,
+      "skipped": 468,
+      "correct": 230,
+      "incorrect": 17,
+      "accuracy": 0.9311740890688259,
+      "mae": 0.0728744939271255,
+      "rmse": 0.2845551966122361,
+      "lecture_name": "creating_breakthrough_products",
+      "time_elapsed": 31.79665517807007,
+      "status": "success"
+    },
+    {
+      "total_sentences": 421,
+      "evaluated": 377,
+      "skipped": 44,
+      "correct": 349,
+      "incorrect": 28,
+      "accuracy": 0.9257294429708223,
+      "mae": 0.09283819628647215,
+      "rmse": 0.3605183418372233,
+      "lecture_name": "deeplearning",
+      "time_elapsed": 42.72836136817932,
+      "status": "success"
+    },
+    {
+      "total_sentences": 886,
+      "evaluated": 221,
+      "skipped": 665,
+      "correct": 160,
+      "incorrect": 61,
+      "accuracy": 0.7239819004524887,
+      "mae": 0.3257918552036199,
+      "rmse": 0.7182180059511166,
+      "lecture_name": "phonetics",
+      "time_elapsed": 52.26293230056763,
+      "status": "success"
+    },
+    {
+      "total_sentences": 736,
+      "evaluated": 713,
+      "skipped": 23,
+      "correct": 626,
+      "incorrect": 87,
+      "accuracy": 0.8779803646563815,
+      "mae": 0.12903225806451613,
+      "rmse": 0.3782294323638912,
+      "lecture_name": "numerics",
+      "time_elapsed": 40.310800552368164,
+      "status": "success"
+    },
+    {
+      "total_sentences": 127,
+      "evaluated": 124,
+      "skipped": 3,
+      "correct": 104,
+      "incorrect": 20,
+      "accuracy": 0.8387096774193549,
+      "mae": 0.16129032258064516,
+      "rmse": 0.4016096644512494,
+      "lecture_name": "image_processing",
+      "time_elapsed": 19.097843408584595,
+      "status": "success"
+    },
+    {
+      "total_sentences": 809,
+      "evaluated": 576,
+      "skipped": 233,
+      "correct": 501,
+      "incorrect": 75,
+      "accuracy": 0.8697916666666666,
+      "mae": 0.13194444444444445,
+      "rmse": 0.3679900360969936,
+      "lecture_name": "physics",
+      "time_elapsed": 46.726704120635986,
+      "status": "success"
+    },
+    {
+      "total_sentences": 717,
+      "evaluated": 421,
+      "skipped": 296,
+      "correct": 309,
+      "incorrect": 112,
+      "accuracy": 0.7339667458432304,
+      "mae": 0.37767220902612825,
+      "rmse": 0.7752097256645105,
+      "lecture_name": "sensory_systems",
+      "time_elapsed": 41.83402347564697,
+      "status": "success"
+    },
+    {
+      "total_sentences": 370,
+      "evaluated": 350,
+      "skipped": 20,
+      "correct": 305,
+      "incorrect": 45,
+      "accuracy": 0.8714285714285714,
+      "mae": 0.12857142857142856,
+      "rmse": 0.35856858280031806,
+      "lecture_name": "short_range",
+      "time_elapsed": 23.445245265960693,
+      "status": "success"
+    },
+    {
+      "total_sentences": 843,
+      "evaluated": 518,
+      "skipped": 325,
+      "correct": 403,
+      "incorrect": 115,
+      "accuracy": 0.777992277992278,
+      "mae": 0.23938223938223938,
+      "rmse": 0.5557700143767283,
+      "lecture_name": "solar_resource",
+      "time_elapsed": 79.37949347496033,
+      "status": "success"
+    },
+    {
+      "total_sentences": 630,
+      "evaluated": 55,
+      "skipped": 575,
+      "correct": 50,
+      "incorrect": 5,
+      "accuracy": 0.9090909090909091,
+      "mae": 0.09090909090909091,
+      "rmse": 0.30151134457776363,
+      "lecture_name": "team_dynamics_game_design",
+      "time_elapsed": 29.60260796546936,
+      "status": "success"
+    },
+    {
+      "total_sentences": 601,
+      "evaluated": 554,
+      "skipped": 47,
+      "correct": 495,
+      "incorrect": 59,
+      "accuracy": 0.8935018050541517,
+      "mae": 0.10649819494584838,
+      "rmse": 0.3263406118549274,
+      "lecture_name": "theory_of_computation",
+      "time_elapsed": 16.093767642974854,
+      "status": "success"
+    }
+  ],
+  "summary": {
+    "total_lectures": 20,
+    "successful": 20,
+    "failed": 0,
+    "overall_accuracy": 0.8165862387772924,
+    "total_evaluated": 8746,
+    "total_correct": 6811,
+    "average_mae": 0.26241531428488796,
+    "average_rmse": 0.7675378835396475,
+    "total_time": 957.9625716209412,
+    "lecture_stats": [
+      {
+        "lecture_name": "creating_breakthrough_products",
+        "accuracy": 0.9311740890688259,
+        "evaluated": 247,
+        "mae": 0.0728744939271255,
+        "rmse": 0.2845551966122361,
+        "time": 31.79665517807007
+      },
+      {
+        "lecture_name": "deeplearning",
+        "accuracy": 0.9257294429708223,
+        "evaluated": 377,
+        "mae": 0.09283819628647215,
+        "rmse": 0.3605183418372233,
+        "time": 42.72836136817932
+      },
+      {
+        "lecture_name": "computer_vision_2_2",
+        "accuracy": 0.925,
+        "evaluated": 80,
+        "mae": 0.075,
+        "rmse": 0.27386127875258304,
+        "time": 15.726192474365234
+      },
+      {
+        "lecture_name": "climate_science_policy",
+        "accuracy": 0.9124087591240876,
+        "evaluated": 274,
+        "mae": 0.10948905109489052,
+        "rmse": 0.4756862119746312,
+        "time": 33.93289852142334
+      },
+      {
+        "lecture_name": "team_dynamics_game_design",
+        "accuracy": 0.9090909090909091,
+        "evaluated": 55,
+        "mae": 0.09090909090909091,
+        "rmse": 0.30151134457776363,
+        "time": 29.60260796546936
+      },
+      {
+        "lecture_name": "theory_of_computation",
+        "accuracy": 0.8935018050541517,
+        "evaluated": 554,
+        "mae": 0.10649819494584838,
+        "rmse": 0.3263406118549274,
+        "time": 16.093767642974854
+      },
+      {
+        "lecture_name": "numerics",
+        "accuracy": 0.8779803646563815,
+        "evaluated": 713,
+        "mae": 0.12903225806451613,
+        "rmse": 0.3782294323638912,
+        "time": 40.310800552368164
+      },
+      {
+        "lecture_name": "short_range",
+        "accuracy": 0.8714285714285714,
+        "evaluated": 350,
+        "mae": 0.12857142857142856,
+        "rmse": 0.35856858280031806,
+        "time": 23.445245265960693
+      },
+      {
+        "lecture_name": "physics",
+        "accuracy": 0.8697916666666666,
+        "evaluated": 576,
+        "mae": 0.13194444444444445,
+        "rmse": 0.3679900360969936,
+        "time": 46.726704120635986
+      },
+      {
+        "lecture_name": "ML_for_health",
+        "accuracy": 0.869120654396728,
+        "evaluated": 489,
+        "mae": 0.3006134969325153,
+        "rmse": 3.4626254563733494,
+        "time": 102.29099225997925
+      },
+      {
+        "lecture_name": "image_processing",
+        "accuracy": 0.8387096774193549,
+        "evaluated": 124,
+        "mae": 0.16129032258064516,
+        "rmse": 0.4016096644512494,
+        "time": 19.097843408584595
+      },
+      {
+        "lecture_name": "cities_and_climate",
+        "accuracy": 0.8251748251748252,
+        "evaluated": 143,
+        "mae": 0.1958041958041958,
+        "rmse": 0.4876086932800089,
+        "time": 37.57806348800659
+      },
+      {
+        "lecture_name": "cities_and_decarbonization",
+        "accuracy": 0.8,
+        "evaluated": 275,
+        "mae": 0.2581818181818182,
+        "rmse": 0.6120011883529758,
+        "time": 44.097821950912476
+      },
+      {
+        "lecture_name": "solar_resource",
+        "accuracy": 0.777992277992278,
+        "evaluated": 518,
+        "mae": 0.23938223938223938,
+        "rmse": 0.5557700143767283,
+        "time": 79.37949347496033
+      },
+      {
+        "lecture_name": "sensory_systems",
+        "accuracy": 0.7339667458432304,
+        "evaluated": 421,
+        "mae": 0.37767220902612825,
+        "rmse": 0.7752097256645105,
+        "time": 41.83402347564697
+      },
+      {
+        "lecture_name": "phonetics",
+        "accuracy": 0.7239819004524887,
+        "evaluated": 221,
+        "mae": 0.3257918552036199,
+        "rmse": 0.7182180059511166,
+        "time": 52.26293230056763
+      },
+      {
+        "lecture_name": "cryptocurrency",
+        "accuracy": 0.722,
+        "evaluated": 500,
+        "mae": 0.452,
+        "rmse": 1.147170431975999,
+        "time": 66.76457023620605
+      },
+      {
+        "lecture_name": "reinforcement_learning",
+        "accuracy": 0.6827643630308077,
+        "evaluated": 1201,
+        "mae": 0.9492089925062448,
+        "rmse": 2.1952943391802773,
+        "time": 77.06464338302612
+      },
+      {
+        "lecture_name": "psychology",
+        "accuracy": 0.6215005599104143,
+        "evaluated": 893,
+        "mae": 0.458006718924972,
+        "rmse": 0.8066076502586416,
+        "time": 88.07068800926208
+      },
+      {
+        "lecture_name": "cognitive_robotics_MIT",
+        "accuracy": 0.6204081632653061,
+        "evaluated": 735,
+        "mae": 0.5931972789115646,
+        "rmse": 1.0613814640575263,
+        "time": 69.15826654434204
+      }
+    ]
+  }
+}
