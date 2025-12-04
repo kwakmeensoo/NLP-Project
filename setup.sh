@@ -43,11 +43,10 @@ echo ""
 conda create -n "$ENV_NAME" python=3.12 -y
 
 echo ""
-echo -e "${GREEN}Step 2/8: Installing PyTorch with CUDA 12.4${NC}"
+echo -e "${GREEN}Step 2/8: Installing PyTorch with CUDA 12.6${NC}"
 echo "   This will install torch, torchvision, torchaudio..."
 echo ""
-conda run -n "$ENV_NAME" pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
-
+conda run -n "$ENV_NAME" pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu126
 echo ""
 echo -e "${GREEN}Step 3/8: Installing CUDA Python${NC}"
 echo ""
@@ -81,7 +80,7 @@ echo ""
 echo -e "${GREEN}Step 8/8: Installing Flash Attention 2${NC}"
 echo "   This may take a few minutes to compile..."
 echo ""
-conda run -n "$ENV_NAME" pip install flash-attn==2.7.4.post1 --no-build-isolation
+conda run -n "$ENV_NAME" pip install flash-attn==2.8.3 --no-build-isolation
 
 echo ""
 echo -e "${GREEN}Installation complete!${NC}"
