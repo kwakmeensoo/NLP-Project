@@ -81,7 +81,7 @@ echo ""
 echo -e "${GREEN}Step 8/8: Installing Flash Attention 2${NC}"
 echo "   This may take a few minutes to compile..."
 echo ""
-conda run -n "$ENV_NAME" pip install flash-attn==2.8.3 --no-build-isolation
+conda run -n "$ENV_NAME" pip install flash-attn==2.7.4.post1 --no-build-isolation
 
 echo ""
 echo -e "${GREEN}Installation complete!${NC}"
