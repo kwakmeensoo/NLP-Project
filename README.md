@@ -272,13 +272,30 @@ Default values obtained through grid search on MaViLS dataset:
 
 Pre-computed evaluation results on the full MaViLS dataset (20 lectures, 12,830 sentences) are available in [experiment/results/](experiment/results/).
 
-**Full Dataset Evaluation (3B Model)**:
-- **Overall Accuracy**: 81.66%
-- **Average MAE**: 0.262
-- **Average RMSE**: 0.768
-- **Model**: nvidia/llama-nemoretriever-colembed-3b-v1
+**Full Dataset Evaluation - Model Comparison**:
 
-Detailed per-lecture results and analysis available in [experiment/results/run_evaluate/](experiment/results/run_evaluate/).
+| Model | Overall Accuracy | Average MAE | Average RMSE | Total Evaluated | Results Directory |
+|-------|------------------|-------------|--------------|-----------------|-------------------|
+| **3B** (nvidia/llama-nemoretriever-colembed-3b-v1) | **81.66%** | **0.262** | **0.768** | 8,746 | [run_evaluate/](experiment/results/run_evaluate/) |
+| **1B** (nvidia/llama-nemoretriever-colembed-1b-v1) | **78.49%** | **0.326** | **0.851** | 8,746 | [run_evaluate_1b/](experiment/results/run_evaluate_1b/) |
+
+**Key Observations**:
+- The 3B model achieves **3.17%p higher accuracy** than the 1B model (81.66% vs 78.49%)
+- The 3B model shows **better precision** with lower MAE (0.262 vs 0.326) and RMSE (0.768 vs 0.851)
+- Both models evaluated on the same 8,746 sentences across all 20 lectures
+- The accuracy gap is consistent with the ~3x parameter difference (3B vs 1B)
+
+**Per-Lecture Performance Comparison (Top 5 Lectures by 3B Accuracy)**:
+
+| Lecture | 3B Accuracy | 1B Accuracy | Δ (3B - 1B) |
+|---------|-------------|-------------|-------------|
+| creating_breakthrough_products | 93.1% | 89.1% | +4.0%p |
+| deeplearning | 92.6% | 91.8% | +0.8%p |
+| computer_vision_2_2 | 92.5% | 92.5% | 0.0%p |
+| climate_science_policy | 91.2% | 92.7% | -1.5%p |
+| team_dynamics_game_design | 90.9% | 90.9% | 0.0%p |
+
+Detailed per-lecture results for both models available in respective results directories.
 
 **Ablation Study (3B Model)**:
 
@@ -304,22 +321,27 @@ Complete ablation results available in [experiment/results/run_ablation/](experi
 ### Reproducibility
 
 **For reproducing experimental results**:
-- Use the **3B model** (`--model-size 3b`) for research evaluation
+- Use the **3B model** (`--model-size 3b`) for maximum accuracy in research evaluation
 - The reported 81.66% accuracy was obtained with the 3B model on all 20 lectures
 - All experiment scripts default to 3B model: `experiment/evaluate.py`, `experiment/grid_search.py`, `experiment/ablation_study.py`
 
 **For practical inference applications**:
 - Use the **1B model** (`--model-size 1b`) for faster inference with lower VRAM requirements
+- The 1B model achieves 78.49% accuracy on the benchmark (3.17%p lower than 3B)
 - The 1B model requires only ~4GB VRAM (vs ~8GB for 3B) and runs approximately 2x faster
 - The inference pipeline defaults to 1B model: `inference/run.py`
-- Note: Accuracy metrics for the 1B model have not been formally benchmarked on the full dataset
 
 **Model Comparison**:
 
 | Model | VRAM | Speed Relative to 3B | Benchmark Accuracy | Default Usage |
 |-------|------|----------------------|--------------------|---------------|
-| 3B | ~8GB | 1x (baseline) | 81.66% (measured) | Research evaluation |
-| 1B | ~4GB | ~2x faster | Not benchmarked | Practical inference |
+| 3B | ~8GB | 1x (baseline) | 81.66% | Research evaluation |
+| 1B | ~4GB | ~2x faster | 78.49% | Practical inference |
+
+**Performance vs Resource Trade-off**:
+- The 3B model provides **3.17%p absolute accuracy improvement** at the cost of 2x VRAM and 2x processing time
+- For applications where accuracy is critical, use the 3B model
+- For real-time or resource-constrained deployments, the 1B model offers a strong balance of performance and efficiency
 
 ## Dataset
 
