@@ -40,7 +40,7 @@ This project extends the MaViLS baseline approach with several key innovations:
 1. **State-of-the-art Multimodal Embeddings**: Integration of NVIDIA NeMo Retriever ColEmbed (1B/3B parameters) for superior text-image representation learning
 2. **Confidence Boosting Mechanism**: Novel scoring adjustment based on the margin between top-k matches to improve decision quality
 3. **Context-Aware Matching**: Exponential moving average (EMA) of recent matches for temporal consistency
-4. **Comprehensive Hyperparameter Optimization**: Systematic grid search across 7 key parameters to identify optimal configuration
+4. **Comprehensive Hyperparameter Optimization**: Systematic grid search across 8 key parameters to identify optimal configuration
 
 
 ## Key Features
@@ -71,9 +71,13 @@ Our approach extends traditional DP-based slide matching with:
 │   ├── grid_search.py       # Hyperparameter optimization
 │   ├── ablation_study.py    # Feature contribution analysis
 │   ├── match.py             # Core matching algorithm
-│   └── dataset/             # MaViLS benchmark data
-│       ├── lectures/        # Audio files and PDF slides
-│       └── ground_truth_files/  # Manually annotated alignments
+│   ├── dataset/             # MaViLS benchmark data
+│   │   ├── lectures/        # Audio files and PDF slides
+│   │   └── ground_truth_files/  # Manually annotated alignments
+│   └── results/             # Pre-computed evaluation results
+│       ├── run_evaluate/    # 3B model full dataset results (81.66%)
+│       ├── run_evaluate_1b/ # 1B model full dataset results (78.49%)
+│       └── run_ablation/    # Feature ablation study results
 │
 ├── inference/               # Practical application pipeline
 │   ├── run.py              # Command-line interface
@@ -299,20 +303,20 @@ Detailed per-lecture results for both models available in respective results dir
 
 **Ablation Study (3B Model)**:
 
-Feature contribution analysis showing impact of each algorithm component:
+Feature contribution analysis showing impact of each algorithm component (± values indicate standard deviation across 20 lectures):
 
 | Configuration | Accuracy | Δ from Baseline |
 |--------------|----------|-----------------|
 | All Features (baseline) | 81.66% ± 9.85% | - |
-| No Sentence Length Filter | 81.62% ± 9.84% | -0.04% |
-| No Context Similarity | 81.18% ± 10.21% | -0.48% |
-| No Exponential Scaling | 79.02% ± 12.56% | -2.64% |
-| No Confidence Boost | 78.40% ± 13.64% | -3.26% |
-| No Features | 78.37% ± 13.60% | -3.29% |
+| No Sentence Length Filter | 81.62% ± 9.84% | -0.04%p |
+| No Context Similarity | 81.18% ± 10.21% | -0.48%p |
+| No Exponential Scaling | 79.02% ± 12.56% | -2.64%p |
+| No Confidence Boost | 78.40% ± 13.64% | -3.26%p |
+| No Features | 78.37% ± 13.60% | -3.29%p |
 
 **Key Findings**:
 - Confidence boosting and exponential scaling are the most impactful features
-- Context similarity provides modest but consistent improvement (~0.5%)
+- Context similarity provides modest but consistent improvement (~0.5%p)
 - Sentence length filtering has minimal impact on accuracy
 - All features combined achieve best performance with lowest variance
 
@@ -326,22 +330,22 @@ Complete ablation results available in [experiment/results/run_ablation/](experi
 - All experiment scripts default to 3B model: `experiment/evaluate.py`, `experiment/grid_search.py`, `experiment/ablation_study.py`
 
 **For practical inference applications**:
-- Use the **1B model** (`--model-size 1b`) for faster inference with lower VRAM requirements
+- Use the **1B model** (`--model-size 1b`) for inference with lower VRAM requirements
 - The 1B model achieves 78.49% accuracy on the benchmark (3.17%p lower than 3B)
-- The 1B model requires only ~4GB VRAM (vs ~8GB for 3B) and runs approximately 2x faster
+- The 1B model requires ≥8GB VRAM (vs ≥12GB for 3B)
 - The inference pipeline defaults to 1B model: `inference/run.py`
 
 **Model Comparison**:
 
-| Model | VRAM | Speed Relative to 3B | Benchmark Accuracy | Default Usage |
-|-------|------|----------------------|--------------------|---------------|
-| 3B | ~8GB | 1x (baseline) | 81.66% | Research evaluation |
-| 1B | ~4GB | ~2x faster | 78.49% | Practical inference |
+| Model | VRAM Requirement | Benchmark Accuracy | Default Usage |
+|-------|------------------|-------------------|---------------|
+| 3B | ≥12GB | 81.66% | Research evaluation |
+| 1B | ≥8GB | 78.49% | Practical inference |
 
 **Performance vs Resource Trade-off**:
-- The 3B model provides **3.17%p absolute accuracy improvement** at the cost of 2x VRAM and 2x processing time
+- The 3B model provides **3.17%p absolute accuracy improvement** but requires more VRAM
 - For applications where accuracy is critical, use the 3B model
-- For real-time or resource-constrained deployments, the 1B model offers a strong balance of performance and efficiency
+- For deployments with limited VRAM (8-12GB), the 1B model offers a strong balance of performance and efficiency
 
 ## Dataset
 

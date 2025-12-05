@@ -275,10 +275,15 @@ python run.py \
 
 ### 1B vs 3B Comparison
 
-| Model | VRAM | Speed | Accuracy | Use Case |
-|-------|------|-------|----------|----------|
-| 1B | ~4GB | Fast | Good | Quick processing, resource-constrained |
-| 3B | ~8GB | Slower | Better | High-accuracy requirements |
+| Model | VRAM Requirement | Benchmark Accuracy | Use Case |
+|-------|------------------|-------------------|----------|
+| 1B | ≥8GB | 78.49% | Resource-constrained deployments |
+| 3B | ≥12GB | 81.66% | High-accuracy requirements |
+
+**Performance Notes**:
+- The 3B model achieves **3.17%p higher accuracy** than 1B on the MaViLS benchmark
+- Both models evaluated on 8,746 sentences across 20 lectures
+- Default is 1B for broader GPU compatibility
 
 ## Memory Management
 
