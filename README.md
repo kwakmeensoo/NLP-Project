@@ -366,21 +366,26 @@ Ground truth files are provided in Excel format with columns:
 
 ### Components
 
-1. **ASR Model**: NVIDIA Parakeet TDT (0.6B parameters)
-   - Transducer-based architecture for streaming speech recognition
+1. **ASR Model**: NVIDIA Parakeet TDT 0.6B v2
+   - FastConformer XL architecture with TDT decoder
+   - Trained on 120,000 hours of English speech (Granary dataset)
    - Sentence-level segmentation with precise timestamps
    - Chunked processing for long-form audio (300s chunks)
+   - License: CC-BY-4.0 (commercial use permitted)
 
 2. **Embedding Model**: NVIDIA NeMo Retriever ColEmbed
-   - **1B variant**: ~4GB VRAM, faster inference
-   - **3B variant**: ~8GB VRAM, 2-3% higher accuracy on benchmark
+   - **Architecture**: SigLIP-2 (vision) + Llama 3.2 (language) with ColBERT-style late interaction
+   - **1B variant**: ~4GB VRAM, faster inference (based on Llama-3.2-1B)
+   - **3B variant**: ~8GB VRAM, 3.17%p higher accuracy (based on Llama-3.2-3B)
    - Multimodal architecture supporting both text and image inputs
    - Shared embedding space for cross-modal retrieval
+   - License: Non-commercial/research use only
 
 3. **TTS Model**: Kokoro-82M
-   - Lightweight synthesis model for audio regeneration
+   - Lightweight 82M-parameter synthesis model
    - Multiple voice options with configurable speech rate
    - Timestamp tracking for alignment verification
+   - License: Apache 2.0 (commercial use permitted)
 
 ### Memory Management
 
@@ -389,32 +394,26 @@ Ground truth files are provided in Excel format with columns:
 - Optional similarity matrix caching for batch evaluations
 - GPU memory typically peaks at 8-10GB with 3B model during matching phase
 
-## Performance Considerations
-
-- **Model Selection**:
-  - Use 1B model for rapid prototyping and resource-constrained environments
-  - Use 3B model for maximum accuracy in research evaluations
-
-- **Batch Processing**:
-  - Similarity matrices computed in vectorized batches on GPU
-  - PDF rendering parallelized across slides
-
-- **Caching**:
-  - Embeddings cached within single evaluation runs
-  - Disable with `use_cached_similarity=False` for memory-constrained scenarios
-
 ## Citation
 
 This project builds upon the MaViLS dataset and methodology.
 
 ```bibtex
-@inproceedings{anderer2023mavils,
-  title={MaViLS: A Benchmark for Matching Videos to Lecture Slides},
-  author={Anderer, Katharina and others},
-  booktitle={Proceedings of the Conference},
-  year={2023}
+@inproceedings{anderer24_interspeech,
+  title = {MaViLS, a Benchmark Dataset for Video-to-Slide Alignment, Assessing Baseline Accuracy with a Multimodal Alignment Algorithm Leveraging Speech, OCR, and Visual Features},
+  author = {Katharina Anderer and Andreas Reich and Matthias Wölfel},
+  year = {2024},
+  booktitle = {Interspeech 2024},
+  pages = {1375--1379},
+  doi = {10.21437/Interspeech.2024-978},
+  issn = {2958-1796}
 }
 ```
+
+**Dataset Links:**
+- Paper: [Interspeech 2024](https://www.isca-archive.org/interspeech_2024/anderer24_interspeech.html) | [arXiv](https://arxiv.org/abs/2409.16765)
+- Code: [GitHub](https://github.com/andererka/MaViLS)
+- License: Dataset is available under permissive terms for research use
 
 ## Acknowledgments
 

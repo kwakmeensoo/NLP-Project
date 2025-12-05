@@ -269,13 +269,6 @@ context_update_rate = 0.24      # EMA update rate
 min_sentence_length = 2         # Min words to use similarity score
 ```
 
-## Performance Tips
-
-1. **Memory Management**: The script automatically manages GPU memory, clearing cache between lectures
-2. **Caching**: Similarity matrices are cached by default for faster repeated evaluations. Disable with `--use-cached-similarity False`
-3. **Model Selection**: Use 1B model for faster iteration during development, 3B for final benchmarks
-4. **Batch Size**: Increase batch size for faster embedding computation if VRAM allows
-
 ## Dataset Format
 
 Ground truth files (Excel format):
@@ -304,20 +297,7 @@ dataset/
 
 ## Troubleshooting
 
-**Out of Memory Errors**:
-- Reduce batch size: `--batch-size 2`
-- Use 1B model: `--model-size 1b`
-- Disable caching: `--use-cached-similarity False`
-
-**Slow Evaluation**:
-- Enable caching: `--use-cached-similarity True` (default)
-- Increase batch size if VRAM allows
-- Use 1B model for faster iteration
-
-**Missing Ground Truth**:
-- Ensure Excel files are in `dataset/ground_truth_files/`
-- Check that `Slidenumber` column exists
-- Sentences with `Slidenumber == -1` are automatically excluded
+**Out of Memory**: Reduce batch size (`--batch-size 2`) or use 1B model (`--model-size 1b`)
 
 ## Research Workflow
 

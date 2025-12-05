@@ -292,23 +292,6 @@ The pipeline automatically manages GPU memory:
 - Each stage unloads its model after completion
 - GPU cache is cleared between stages
 
-## Performance Tips
-
-1. **Faster Processing**:
-   - Use 1B model: `--model-size 1b`
-   - Skip TTS if not needed: `--skip-tts`
-   - Use CPU if GPU unavailable: `--device cpu`
-
-2. **Higher Accuracy**:
-   - Use 3B model: `--model-size 3b`
-   - Tune matching parameters based on content type
-   - Increase confidence threshold for conservative matching
-
-3. **Memory Optimization**:
-   - Reduce ASR batch size: `--asr-batch-size 2`
-   - Use 1B model
-   - Process shorter audio chunks: `--asr-chunk-duration 180`
-
 ## Supported Audio Formats
 
 ASR module supports common formats:
@@ -357,31 +340,11 @@ min_sentence_length = 2         # Min words to use similarity
 
 ## Troubleshooting
 
-### Out of Memory
+**Out of Memory**: Reduce ASR batch size (`--asr-batch-size 2`) or use 1B model (`--model-size 1b`)
 
-```bash
-# Reduce ASR batch size
-python run.py --audio lecture.wav --pdf slides.pdf --asr-batch-size 2
+**Non-English Audio**: This pipeline only supports English audio. The ASR model cannot transcribe other languages.
 
-# Use 1B model
-python run.py --audio lecture.wav --pdf slides.pdf --model-size 1b
-
-# Use CPU (slower but no VRAM limit)
-python run.py --audio lecture.wav --pdf slides.pdf --device cpu
-```
-
-### Audio Processing Issues
-
-- **Non-English audio**: This pipeline only supports English audio. The ASR model cannot transcribe other languages.
-- Ensure audio is clear and not heavily compressed
-- Try reducing chunk duration: `--asr-chunk-duration 180`
-- Check audio format is supported
-
-### PDF Rendering Issues
-
-- Ensure PDF is not password-protected
-- Check PDF has actual content (not just scanned images)
-- Try re-saving PDF with standard settings
+**PDF Issues**: Ensure PDF is not password-protected and has actual content (not just scanned images)
 
 ## License and Model Information
 
@@ -391,19 +354,22 @@ This module is part of the NLP audio-to-slide matching project.
 
 **ASR Model:**
 - **Model**: NVIDIA Parakeet TDT 0.6B v2
+- **Architecture**: FastConformer XL with TDT decoder
 - **Language Support**: English only
-- **Training Data**: 120,000 hours of English speech
+- **Training Data**: 120,000 hours of English speech (Granary dataset)
 - **License**: CC-BY-4.0 (Creative Commons Attribution 4.0)
 - **Commercial Use**: ✓ Permitted with attribution
 - **HuggingFace**: [nvidia/parakeet-tdt-0.6b-v2](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2)
 
 **Matching Model:**
 - **Model**: NVIDIA NeMo Retriever ColEmbed (1B/3B variants)
-- **License**: NVIDIA Non-Commercial License (for base model)
-  - Uses Apache 2.0 components (SigLIP)
-  - Uses LLAMA 3.2 Community License (language model)
-- **Commercial Use**: Requires NVIDIA AI Product Agreement or NVIDIA AI Enterprise license
-- **HuggingFace**: [nvidia/llama-nemoretriever-colembed-1b-v1](https://huggingface.co/nvidia/llama-nemoretriever-colembed-1b-v1)
+- **Architecture**: SigLIP-2 (vision) + Llama 3.2 (language) with ColBERT-style late interaction
+- **Base Models**:
+  - Vision: google/siglip2-giant-opt-patch16-384
+  - Language: meta-llama/Llama-3.2-1B (1B variant) / meta-llama/Llama-3.2-3B (3B variant)
+- **License**: Non-commercial/research use only
+- **Commercial Use**: ✗ Requires separate licensing from NVIDIA
+- **HuggingFace**: [nvidia/llama-nemoretriever-colembed-1b-v1](https://huggingface.co/nvidia/llama-nemoretriever-colembed-1b-v1) / [nvidia/llama-nemoretriever-colembed-3b-v1](https://huggingface.co/nvidia/llama-nemoretriever-colembed-3b-v1)
 
 **TTS Model:**
 - **Model**: Kokoro-82M
@@ -415,9 +381,10 @@ This module is part of the NLP audio-to-slide matching project.
 ### Important Notes
 
 - **NVIDIA Parakeet TDT** and **Kokoro-82M** can be used commercially with proper attribution
-- **NVIDIA NeMo Retriever** requires additional licensing for commercial deployment
-  - Academic/research use is generally permitted
-  - Commercial users should obtain NVIDIA AI Enterprise license
+- **NVIDIA NeMo Retriever** is **non-commercial/research use only**
+  - Academic and research use is permitted under the current license
+  - Commercial deployment requires separate licensing agreement from NVIDIA
+  - Contact NVIDIA for commercial licensing options
 - For real-world deployment, verify license compliance for your specific use case
 
 ### Additional Resources
