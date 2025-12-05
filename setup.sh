@@ -56,7 +56,7 @@ echo ""
 echo -e "${GREEN}Step 4/8: Installing NVIDIA NeMo for Parakeet ASR${NC}"
 echo "   This will install NeMo toolkit with ASR support..."
 echo ""
-conda run -n "$ENV_NAME" pip install nemo_toolkit[asr]
+conda run -n "$ENV_NAME" pip install nemo_toolkit[asr]==2.5.3
 
 echo ""
 echo -e "${GREEN}Step 5/8: Installing audio processing and TTS libraries${NC}"
